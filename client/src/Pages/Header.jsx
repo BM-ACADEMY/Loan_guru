@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Mail, Phone, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import Logo from "../assets/img/logo.png";
 
 const Header = () => {
   const [activeLink, setActiveLink] = useState("Home");
@@ -9,9 +10,7 @@ const Header = () => {
   const [openMobileDropdown, setOpenMobileDropdown] = useState(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 0);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -20,14 +19,15 @@ const Header = () => {
     { name: "Home", path: "#home" },
     { name: "About", path: "#about" },
     {
-      name: "Courses",
+      name: "Services",
       hasDropdown: true,
       dropdownContent: [
-        { name: "Alagappa University", path: "#courses", description: "Centre for Distance Education" },
-        { name: "Bharathidasan University", path: "#courses", description: "Centre for Distance Education" },
+        { name: "Loan Consulting", path: "#services" },
+        { name: "Documentation Preparation", path: "#services" },
+        { name: "Bank Coordination", path: "#services" },
       ],
     },
-    { name: "Testimonials", path: "#testimonials" },
+    { name: "Contact", path: "#contact" },
   ];
 
   const dropdownContentVariants = {
@@ -35,36 +35,14 @@ const Header = () => {
     visible: {
       height: "auto",
       opacity: 1,
-      transition: {
-        type: "tween",
-        duration: 0.3,
-        ease: "easeOut",
-        when: "beforeChildren",
-        staggerChildren: 0.05,
-      },
+      transition: { type: "tween", duration: 0.3, ease: "easeOut", when: "beforeChildren", staggerChildren: 0.05 },
     },
-    exit: {
-      height: 0,
-      opacity: 0,
-      transition: {
-        type: "tween",
-        duration: 0.2,
-        ease: "easeIn",
-      },
-    },
+    exit: { height: 0, opacity: 0, transition: { type: "tween", duration: 0.2, ease: "easeIn" } },
   };
 
   const navLinkVariants = {
     hidden: { opacity: 0, y: -20 },
-    visible: (i) => ({
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: i * 0.1,
-        duration: 0.5,
-        ease: "easeOut",
-      },
-    }),
+    visible: (i) => ({ opacity: 1, y: 0, transition: { delay: i * 0.1, duration: 0.5, ease: "easeOut" } }),
   };
 
   const navigateTo = (e, path, name) => {
@@ -72,9 +50,11 @@ const Header = () => {
     setActiveLink(name);
     setIsOffcanvasOpen(false);
     setOpenMobileDropdown(null);
+
     const element = document.querySelector(path);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
+      window.history.pushState(null, "", path); // Update URL without reload
     }
   };
 
@@ -84,9 +64,8 @@ const Header = () => {
       <nav className={`w-full transition-all duration-300 bg-white shadow-lg py-3`}>
         <div className="px-4 md:px-8 lg:px-16 flex items-center">
           <div className="flex items-center space-x-4 justify-start">
-            <div className="text-xl font-bold text-center text-[#234159] leading-tight">
-              <span className="block text-md">Pravishraj</span>
-              <span className="block text-md">Memorial Academy</span>
+            <div>
+              <img src={Logo} alt="logo" className="w-20 mx-auto object-contain" />
             </div>
           </div>
 
@@ -104,9 +83,7 @@ const Header = () => {
                   <a
                     href={item.path}
                     className={`flex items-center space-x-1 text-gray-700 font-semibold transition-colors duration-200 ${
-                      activeLink === item.name && !item.hasDropdown
-                        ? "text-[#48b06c]"
-                        : "hover:text-[#48b06c]"
+                      activeLink === item.name && !item.hasDropdown ? "text-[#48b06c]" : "hover:text-[#48b06c]"
                     }`}
                     onClick={(e) => {
                       if (!item.hasDropdown) navigateTo(e, item.path, item.name);
@@ -122,7 +99,7 @@ const Header = () => {
                   </a>
                   {item.hasDropdown && (
                     <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-64 bg-white border border-gray-200 rounded-xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
-                      <div className="p-4 space-y-3">
+                      <div className="p-4 space-y-1">
                         {item.dropdownContent.map((subItem) => (
                           <a
                             key={subItem.name}
@@ -133,7 +110,6 @@ const Header = () => {
                             onClick={(e) => navigateTo(e, subItem.path, subItem.name)}
                           >
                             <div className="font-medium text-gray-800">{subItem.name}</div>
-                            <div className="text-sm text-gray-500">{subItem.description}</div>
                           </a>
                         ))}
                       </div>
@@ -142,24 +118,11 @@ const Header = () => {
                 </motion.div>
               ))}
             </div>
+
             <div className="lg:hidden flex items-center">
-              <button
-                onClick={() => setIsOffcanvasOpen(true)}
-                className="text-gray-500 hover:text-gray-800 focus:outline-none"
-              >
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4 6h16M4 12h16m-7 6h7"
-                  ></path>
+              <button onClick={() => setIsOffcanvasOpen(true)} className="text-gray-500 hover:text-gray-800 focus:outline-none">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
                 </svg>
               </button>
             </div>
@@ -187,10 +150,7 @@ const Header = () => {
             >
               <div className="flex justify-between items-center mb-6">
                 <span className="text-xl font-bold text-gray-800">Menu</span>
-                <button
-                  onClick={() => setIsOffcanvasOpen(false)}
-                  className="text-gray-500 hover:text-gray-800 focus:outline-none"
-                >
+                <button onClick={() => setIsOffcanvasOpen(false)} className="text-gray-500 hover:text-gray-800 focus:outline-none">
                   <X className="w-6 h-6" />
                 </button>
               </div>
@@ -201,9 +161,7 @@ const Header = () => {
                       <>
                         <button
                           onClick={() =>
-                            setOpenMobileDropdown(
-                              openMobileDropdown === item.name ? null : item.name
-                            )
+                            setOpenMobileDropdown(openMobileDropdown === item.name ? null : item.name)
                           }
                           className="flex items-center justify-between w-full py-3 text-gray-700 font-semibold hover:text-[#48b06c] transition-colors duration-200"
                         >
@@ -244,9 +202,7 @@ const Header = () => {
                       <a
                         href={item.path}
                         className={`text-lg font-semibold transition-colors duration-200 ${
-                          activeLink === item.name
-                            ? "text-[#48b06c]"
-                            : "text-gray-700 hover:text-[#48b06c]"
+                          activeLink === item.name ? "text-[#48b06c]" : "text-gray-700 hover:text-[#48b06c]"
                         }`}
                         onClick={(e) => navigateTo(e, item.path, item.name)}
                       >
@@ -262,6 +218,11 @@ const Header = () => {
                     onClick={(e) => {
                       e.preventDefault();
                       setIsOffcanvasOpen(false);
+                      const element = document.querySelector("#contact");
+                      if (element) {
+                        element.scrollIntoView({ behavior: "smooth" });
+                        window.history.pushState(null, "", "#contact");
+                      }
                     }}
                   >
                     Contact Us
