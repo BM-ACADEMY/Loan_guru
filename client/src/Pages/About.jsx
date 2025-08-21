@@ -8,16 +8,16 @@ const About = () => {
   }, []);
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-white via-violet-50 to-pink-50 dark:from-slate-950 dark:via-slate-900 dark:to-violet-950" id="about">
+    <section className="relative overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-violet-950" id="about">
 
 
       <div className="mx-auto max-w-7xl px-6 md:px-10 py-20">
         {/* Header */}
         <header className="text-center mb-14" data-aos="fade-down">
-          <h1 className="mt-4 text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+          <h1 className="mt-4 text-3xl md:text-4xl font-extrabold tracking-tight text-white">
             About <span className="text-[#07bf69]">Us</span>
           </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-slate-600 md:text-lg dark:text-slate-300">
+          <p className="mx-auto mt-4 max-w-2xl md:text-lg text-slate-300">
             At Loan Guru, our mission is simple
           </p>
         </header>
@@ -38,7 +38,7 @@ const About = () => {
 
             {/* Floating rating badge */}
             <div
-              className="absolute -top-5 -right-4 md:-top-5 md:-right-6 flex items-center gap-2 rounded-full bg-white/90 dark:bg-white/90 backdrop-blur ring-1 ring-slate-200  px-3 py-2 shadow-lg"
+              className="absolute -top-5 -right-4 md:-top-5 md:-right-6 flex items-center gap-2 rounded-full bg-white/90 backdrop-blur ring-1 ring-slate-200  px-3 py-2 shadow-lg"
               data-aos="zoom-in"
               data-aos-delay="150"
             >
@@ -50,7 +50,7 @@ const About = () => {
               >
                 <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
               </svg>
-              <span className="text-sm font-semibold text-slate-800 dark:text-slate-800">
+              <span className="text-sm font-semibold text-slate-800">
                 4.9/5
               </span>
               <span className="text-xs text-slate-700 ">

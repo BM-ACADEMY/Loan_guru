@@ -52,11 +52,11 @@ const services = [
     ],
     icon: <FaRupeeSign />,
     bgColor: "bg-gradient-to-br from-white to-indigo-50",
-    darkText: true,
+    lightText: true, // renamed for clarity
   },
 ];
 
-const Card = ({ title, bullets, icon, bgColor, darkText = false }) => (
+const Card = ({ title, bullets, icon, bgColor, lightText = false }) => (
   <div
     className={`shadow-lg rounded-2xl p-6 transition-all duration-300 border ${bgColor} 
                 hover:shadow-xl hover:-translate-y-0.5 max-w-sm w-full mx-auto`}
@@ -65,14 +65,14 @@ const Card = ({ title, bullets, icon, bgColor, darkText = false }) => (
     <div className="flex items-center gap-4 mb-4">
       <div
         className={`p-3 rounded-full text-2xl ${
-          darkText ? "bg-indigo-100 text-indigo-700" : "bg-white/20 text-white"
+          lightText ? "bg-indigo-100 text-indigo-700" : "bg-white/20 text-white"
         }`}
       >
         {icon}
       </div>
       <h3
         className={`text-xl font-semibold ${
-          darkText ? "text-indigo-900" : "text-white"
+          lightText ? "text-indigo-900" : "text-white"
         }`}
       >
         {title}
@@ -81,7 +81,7 @@ const Card = ({ title, bullets, icon, bgColor, darkText = false }) => (
 
     <ul
       className={`space-y-2 pl-14 ${
-        darkText ? "text-slate-700" : "text-white/90"
+        lightText ? "text-slate-700" : "text-white/90"
       }`}
     >
       {bullets.map((b, i) => (
@@ -104,8 +104,7 @@ const Services = () => {
   return (
     <section
       id="services"
-      className="w-full py-20 px-6 relative overflow-hidden bg-gradient-to-tr 
-                 from-white via-violet-50 to-pink-50 dark:from-slate-950 dark:via-slate-900 dark:to-violet-950"
+      className="w-full py-20 px-6 relative overflow-hidden bg-gradient-to-tr from-slate-950 via-slate-900 to-violet-950"
     >
       {/* Heading */}
       <header className="text-center mb-14" data-aos="fade-down">
@@ -120,19 +119,17 @@ const Services = () => {
 
       {/* Services Grid */}
       <div className="flex flex-wrap justify-center gap-8 max-w-6xl mx-auto">
-  {services.map((s, index) => (
-    <div
-      key={s.title}
-      data-aos="fade-up"
-      data-aos-delay={index * 100}
-      className="w-full sm:w-[45%] max-w-md"
-    >
-      <Card {...s} />
-    </div>
-  ))}
-</div>
-
-
+        {services.map((s, index) => (
+          <div
+            key={s.title}
+            data-aos="fade-up"
+            data-aos-delay={index * 100}
+            className="w-full sm:w-[45%] max-w-md"
+          >
+            <Card {...s} />
+          </div>
+        ))}
+      </div>
     </section>
   );
 };

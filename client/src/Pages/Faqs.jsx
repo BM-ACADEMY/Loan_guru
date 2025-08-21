@@ -36,13 +36,13 @@ const FAQAccordion = () => {
   };
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-tl from-white via-violet-50 to-pink-50 dark:from-slate-950 dark:via-slate-900 dark:to-violet-950">
+    <section className="relative overflow-hidden bg-gradient-to-tl from-slate-950 via-slate-900 to-violet-950">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <h2
-          className="text-3xl sm:text-4xl font-extrabold text-center mb-8 text-gray-900 dark:text-white"
+          className="text-3xl sm:text-4xl font-extrabold text-center mb-8 text-white"
           data-aos="fade-up"
         >
-          FAQs
+          FAQ<span className="text-[#07bf69]">s</span>
         </h2>
         <div className="space-y-4">
           {faqs.map((faq, index) => (
@@ -50,11 +50,11 @@ const FAQAccordion = () => {
               key={index}
               data-aos="fade-up"
               data-aos-delay={index * 150} // stagger animation
-              className="border-2 border-gray-500  rounded-xl shadow-sm bg-white/70 dark:bg-slate-900/50 backdrop-blur-sm"
+              className="border-2 border-gray-500  rounded-xl shadow-sm bg-slate-900/50 backdrop-blur-sm"
             >
               <button
                 onClick={() => toggleFAQ(index)}
-                className="w-full flex justify-between items-center p-4 sm:p-5 text-left font-medium text-gray-800 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-slate-800 rounded-xl transition"
+                className="w-full flex justify-between items-center p-4 sm:p-5 text-left font-medium text-gray-200 hover:bg-slate-800 rounded-xl transition"
               >
                 {faq.question}
                 <motion.span
@@ -76,7 +76,7 @@ const FAQAccordion = () => {
                     transition={{ duration: 0.4, ease: "easeInOut" }}
                     className="overflow-hidden"
                   >
-                    <div className="p-4 pt-0 text-gray-600 dark:text-gray-400">
+                    <div className="p-4 pt-0 text-gray-400">
                       {faq.answer}
                     </div>
                   </motion.div>

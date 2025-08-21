@@ -3,7 +3,7 @@ import Logo from "../assets/img/footerlogo.png";
 
 export default function Footer() {
   return (
-    <footer className="pt-10 px-6 md:px-16 lg:px-24 xl:px-32 w-full text-gray-300 relative overflow-hidden bg-gradient-to-tl from-white via-violet-50 to-pink-50 dark:from-slate-950 dark:via-slate-900 dark:to-violet-950" id="contact">
+    <footer className="pt-10 px-6 md:px-16 lg:px-24 xl:px-32 w-full text-gray-300 relative overflow-hidden bg-gradient-to-tl from-slate-950 via-slate-900 to-violet-950" id="contact">
       <div className="flex flex-col md:flex-row justify-between w-full gap-10 border-b border-gray-500/30 pb-6">
         {/* Logo & Description */}
         <div className="md:max-w-96">
